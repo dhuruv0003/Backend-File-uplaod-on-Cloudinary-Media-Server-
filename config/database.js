@@ -1,18 +1,17 @@
-const mongoose=require('mongoose');
+const mongoose = require("mongoose");
 
-const fileSchema=mongoose.Schema({
-    name:{
+require("dotenv").config();
 
-    },
-    tags:{
-
-    },
-    email:{
-
-    },
-    file:{
-
-    }
-})
-
-module.exports=mongoose.model("fileUp",fileSchema)
+exports.dbConnect = async () => {
+  mongoose
+    .connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("dbconnected Successfully");
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+};
