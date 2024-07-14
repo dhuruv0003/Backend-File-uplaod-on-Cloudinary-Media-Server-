@@ -78,13 +78,24 @@ const cloudinary=require('cloudinary').v2;
 
             const response=await uploadFileToCloudinary(File,"Dhuruv_Cloud")
            
+           
             console.log(response);
             //Save entry into the database
          
+            const dbEntry=await fileModel.create({
+                name,
+                imageUrl:response.secure_url,
+                email,
+                tags
+            })
+
             return res.status(200).json({
                 success:true,
-                message:"File uploaded to cloudinary"
+                imageUrl:response.secure_url,
+                message:"File uploaded to cloudinary",
+                dbEntry
             })
+        
         } catch (error) {
             console.error(error);
         }
