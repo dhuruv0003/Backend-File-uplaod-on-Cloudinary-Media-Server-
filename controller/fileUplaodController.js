@@ -12,19 +12,22 @@ exports.localFileUpload=async(req,res)=>{
         //kis path pr file ko store karna chahte ho
         // __dirname replresent current directory 
 
-        // in path we add current directory name, a route /files/ and current date 
+        // in path we add current directory name, a route /files/ and current date and at last extension
+        
+        // To add extension of file we split file name on the basis of dot and return the posrtion after the daot
 
-        let path=__dirname + "/files/" + Date.now();
+        let path=__dirname + "/files/" + Date.now()+ `.${File.name.split('.')[1]}`;
         console.log(" path ",path);
 
-        // req.files.file.mv: A function to move the file elsewhere on your server. Can take a callback or return a promise, say any error
+        // req.files.file.mv: A function to move the file elsewhere onthe path of your server. Can take a callback or return a promise, say any error
 
         File.mv(path,(err)=>{
             console.log(err);
         })
 
-        res.json({
+       return res.json({
             success:true,
+            path,
             message:'Local File Upload Successfully'
         })
 
