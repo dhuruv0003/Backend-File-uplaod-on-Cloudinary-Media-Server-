@@ -25,9 +25,11 @@ exports.localFileUpload=async(req,res)=>{
             console.log(err);
         })
 
+        // const fileUpload=await FileUp.create({"name":Date.now()+`.${File.name.split('.')[1]}`})
+
        return res.json({
             success:true,
-            path,
+            // fileUpload,
             message:'Local File Upload Successfully'
         })
 
