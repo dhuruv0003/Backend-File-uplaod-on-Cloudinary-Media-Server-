@@ -4,7 +4,8 @@ const FileUp=require('../models/fileModel')
 
 exports.localFileUpload=async(req,res)=>{
     try {
-        //Fetch file
+        //Fetch file 
+        // Note in Postman post request in body-> from-data, give Key as file, sotheat we fetch file data from req.files.file
         const File=req.files.file
         console.log("File is",File);
 
