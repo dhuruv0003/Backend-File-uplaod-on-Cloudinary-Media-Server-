@@ -48,8 +48,7 @@ const cloudinary=require('cloudinary').v2;
     // file= the file we want to upload, since file should be string non-empty type, so use .tempFilePath,
     // folder is the folder in cloudinary where we want to upload file 
     const uploadFileToCloudinary=async(file,folder)=>{
-        const options={folder}
-        return await cloudinary.uploader.upload(file.tempFilePath,options)
+        return cloudinary.uploader.upload(file.tempFilePath,{folder})
     }
 
     exports.imageUpload=async (req,res)=>{
@@ -68,7 +67,7 @@ const cloudinary=require('cloudinary').v2;
 
             const fileType=File.name.split('.')[1].toLowerCase();
             // aggar supported types im given file type present nhi h so return faiilure response  
-            if(supportedTypes.includes(fileType)===false){
+            if(!supportedTypes.includes(fileType)){
                 return res.status(501).json({
                     success:false,
                     message:"File type not supported"
