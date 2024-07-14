@@ -48,7 +48,10 @@ const cloudinary=require('cloudinary').v2;
     // file= the file we want to upload, since file should be string non-empty type, so use .tempFilePath,
     // folder is the folder in cloudinary where we want to upload file 
     const uploadFileToCloudinary=async(file,folder)=>{
-        return cloudinary.uploader.upload(file.tempFilePath,{folder})
+        const options={folder}
+        //Note=> we need the destination folder to be of auto type, so that it can keep any type of resource
+        options.resource_type="auto"
+        return await cloudinary.uploader.upload(file.tempFilePath,options)
     }
 
     exports.imageUpload=async (req,res)=>{
@@ -104,4 +107,45 @@ const cloudinary=require('cloudinary').v2;
 
 //Video Upload Handler =>  It is used to fetch the video file from the client and then store/upload it onto cloudinary 
 
-    
+    exports.videoUpload=async(req,res)=>{
+       try {
+         // Fetch data 
+         const {name,tags,email}=req.body;
+
+         //Fetch File
+         const File=req.files.videoFile;
+ 
+         //Validations
+ 
+         const supportedTypes=["mp4","mov","gif"]
+         const fileType=File.name.split('.')[1].toLowerCase();
+ 
+         if(!supportedTypes.includes(fileType)){
+             return res.status(404).json({
+                 success:false,
+                 message:"File Format Not Supported"
+             })
+         }
+
+         // In case file fromat is supporte
+ 
+         const response=await uploadFileToCloudinary(File,"Dhuruv_Cloud");
+         console.log(response);
+ 
+         
+         const dbEntry=await fileModel.create({
+             name,
+             imageUrl:response.secure_url,
+             email,
+             tags
+         })
+
+         return res.status(200).json({
+            success:true,
+            message:"File uploaded Successfully"
+        })
+       }
+        catch (error) {
+        console.error(error);
+       }
+    }
