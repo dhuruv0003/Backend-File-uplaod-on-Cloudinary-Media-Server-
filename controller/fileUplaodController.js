@@ -12,9 +12,9 @@ exports.localFileUpload=async(req,res)=>{
         //kis path pr file ko store karna chahte ho
         // __dirname replresent current directory 
 
-        // in path we add current directory name, at route /files/ and current date and at last extension
+        // in path we add current directory name + at route /files/ + current date + at last extension
         
-        // To add extension of file we split file name on the basis of dot and return the posrtion after the daot
+        // To add extension of file we split file name on the basis of dot('.') and return the posrtion after the daot
 
         let path=__dirname + "/files/" + Date.now()+ `.${File.name.split('.')[1]}`;
         console.log(" path ",path);
