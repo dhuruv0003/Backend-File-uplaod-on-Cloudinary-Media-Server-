@@ -1,21 +1,35 @@
+// app create 
 const express=require("express")
-
 const app=express();
 
-app.use(express.json());
-
+//PORT
 require('dotenv').config();
-
-const cookieParser=require('cookie-parser')
-app.use(cookieParser)
-
 const PORT=process.env.PORT || 4000
 
-const route=require('./routes/fileRoutes')
-app.use("/api/v1",route)
+// Using Middleware 
+app.use(express.json());
 
+const cookieParser=require('cookie-parser')
+app.use(cookieParser())
+
+//Note to upload file on cloudinary we user cloudinary package, but to upload the file only on the server, we user express-fileuplaod media server.
+const fileUpload=require('express-fileupload')
+app.use(fileUpload())
+
+//Db connect
+require('./config/database').dbConnect();
+
+//Connect to cloud using cloudinary
+const cloudinary=require('./config/cloudinary')
+cloudinary.cloudinaryConnect();
+
+
+// API route Mount 
+const route=require('./routes/fileRoutes')
+app.use("/api/v1/upload",route)
+
+// Activate server 
 app.listen(PORT,()=>{
     console.log(`Server started successfully at http://localhost:${PORT}`);
 })
 
-require('./config/database').dbConnect();
