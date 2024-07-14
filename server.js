@@ -4,7 +4,7 @@ const app=express();
 
 //PORT
 require('dotenv').config();
-const PORT=process.env.PORT || 3000
+const PORT=process.env.PORT || 8000
 
 // Using Middleware 
 app.use(express.json());
@@ -15,12 +15,12 @@ app.use(cookieParser())
 //Note to upload file on cloudinary we user cloudinary package, but to upload the file only on the server, we user express-fileuplaod media server.
 // we can add tmp file by setting it true, or leave it empty 
 const fileUpload=require('express-fileupload')
-// app.use(fileUpload({
-//     useTempFiles:true,
-//     tempFileDir:'/tmp/'
-// }))
+app.use(fileUpload({
+    useTempFiles:true,
+    tempFileDir:'/tmp/'
+}))
 
-app.use(fileUpload());
+// app.use(fileUpload());
 
 //Db connect
 require('./config/database').dbConnect();

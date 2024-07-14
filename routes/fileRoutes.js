@@ -6,7 +6,7 @@ const {imageUpload,videoUpload,imageReducerUpload, localFileUpload}=require('../
 
 // API ROUTES
 
-// router.post('/imageUpload',imageUpload)
+router.post('/imageUpload',imageUpload)
 // router.post('/videoUpload',videoUpload)
 // router.post('/imageReduceUpload',imageReducerUpload)
 
