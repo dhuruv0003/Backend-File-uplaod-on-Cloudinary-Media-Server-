@@ -4,7 +4,7 @@ require('dotenv').config();
 
 exports.cloudinaryConnect=()=>{
     try {
-        //To establish connection of server with cloudinary we make use of config() funciton of cloudinary  
+        //To establish connection of server with cloudinary we make use of config() funciton of cloudinary  method
         //Format=>  cloudinary.config({ 
         //              cloud_name: --, 
         //              api_key: --, 
