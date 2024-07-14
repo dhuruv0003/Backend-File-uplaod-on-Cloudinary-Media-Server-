@@ -6,12 +6,12 @@ const {imageUpload,videoUpload,imageReducerUpload, localFileUpload}=require('../
 
 // API ROUTES
 
+router.post('/localFileUpload',localFileUpload)
 router.post('/imageUpload',imageUpload)
 router.post('/videoUpload',videoUpload)
-// router.post('/imageReduceUpload',imageReducerUpload)
+router.post('/imageReduceUpload',imageReducerUpload)
 
 
 
-router.post('/localFileUpload',localFileUpload)
 
 module.exports=router

@@ -132,7 +132,7 @@ const cloudinary=require('cloudinary').v2;
          const response=await uploadFileToCloudinary(File,"Dhuruv_Cloud");
          console.log(response);
  
-         
+
          const dbEntry=await fileModel.create({
              name,
              imageUrl:response.secure_url,
@@ -149,3 +149,7 @@ const cloudinary=require('cloudinary').v2;
         console.error(error);
        }
     }
+
+
+    
+
