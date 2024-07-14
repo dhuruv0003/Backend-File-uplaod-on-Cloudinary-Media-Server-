@@ -41,7 +41,7 @@ const cloudinary=require('cloudinary').v2;
         }
     }
 
-// 2. Image Upload Handler=>  It is used to fetch the media or file from the client and then store/upload it onto 
+// 2. Image Upload Handler=>  It is used to fetch the media or file from the client and then store/upload it onto cloudinary 
 
 
 // cloudinary upload function
@@ -100,3 +100,8 @@ const cloudinary=require('cloudinary').v2;
             console.error(error);
         }
     }
+
+
+//Video Upload Handler =>  It is used to fetch the video file from the client and then store/upload it onto cloudinary 
+
+    
